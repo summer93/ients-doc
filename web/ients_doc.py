@@ -12,7 +12,9 @@ arg = True
 @app.route('/static/<filename>')
 def upload_file(filename):
     if arg:
-    	return send_file('/data/{}'.format(filename))
+        response = make_response()
+        response.headers['X-Accel-Redirect'] = '/data/{}'.format(filename)
+	return response
     else:
         return 'no!no!no!'
 
